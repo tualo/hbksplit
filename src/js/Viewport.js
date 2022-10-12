@@ -22,7 +22,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
                 items: [
                   {
                     xtype: 'tualocontextdduploadlist',
-                    uploadUrl:  "/hbksplit/upload",
+                    uploadUrl:  "./hbksplit/upload",
                     listeners: {
                       done: function(){
                         }
