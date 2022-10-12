@@ -16,6 +16,7 @@ class PdfSplit implements IRoute{
             App::result('R',$_REQUEST);
             App::contenttype('application/json');
             try{
+                if(!defined('PDF_SPLIT_PATH'))  throw new \Exception("configuration PDF_SPLIT_PATH missed");
 
                 $jobid = '867625432634';
                 ini_set('upload_max_filesize','2GB');
