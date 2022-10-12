@@ -35,6 +35,7 @@ class PdfSplit implements IRoute{
                 }else{
                     if (!isset($_SERVER['HTTP_X_FILE_NAME'])) throw new \Exception("Unknown file name");
                     $fileName = $_SERVER['HTTP_X_FILE_NAME'];
+
                     if (isset($_SERVER['HTTP_X_FILENAME_ENCODER']) && 'base64' == $_SERVER['HTTP_X_FILENAME_ENCODER']) {
                         $fileName = base64_decode($fileName);
                     }
@@ -80,7 +81,7 @@ class PdfSplit implements IRoute{
             }catch(\Exception $e){
                 App::result('msg', $e->getMessage());
             }
-        },array('get','post'),true);
+        },array('get','post','put'),true);
 
     }
 }
