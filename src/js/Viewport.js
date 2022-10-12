@@ -27,7 +27,9 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
           emptyText: 'Drop Files Here',
           deferEmptyText: false
       },
-      store: store,
+      store: {
+        type: 'memory'
+      },
 
       listeners: {
 
