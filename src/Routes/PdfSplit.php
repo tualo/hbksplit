@@ -34,6 +34,7 @@ class PdfSplit implements IRoute{
                     }
                   }
                 }else{
+                    /*
                     if (!isset($_SERVER['HTTP_X_FILE_NAME'])) throw new \Exception("Unknown file name");
                     $fileName = $_SERVER['HTTP_X_FILE_NAME'];
 
@@ -43,16 +44,16 @@ class PdfSplit implements IRoute{
                     $fileName = htmlspecialchars($fileName);
                     $mimeType = htmlspecialchars($_SERVER['HTTP_X_FILE_TYPE']);
                     $size = intval($_SERVER['HTTP_X_FILE_SIZE']);
+                    */
+                    $fileName = "$jobid.current.upload";
                     $inputStream = fopen('php://input', 'r');
                     $outputFilename = PDF_SPLIT_PATH . '/' . $fileName;
                     $realSize = 0;
                     $data = '';
                     if ($inputStream) {
-                        if (! $config['fake']) {
-                            $outputStream = fopen($outputFilename, 'w');
-                            if (! $outputStream) {
-                                throw new \Exception( 'Error creating local file');
-                            }
+                        $outputStream = fopen($outputFilename, 'w');
+                        if (! $outputStream) {
+                            throw new \Exception( 'Error creating local file');
                         }
 
                         while (! feof($inputStream)) {
@@ -72,10 +73,12 @@ class PdfSplit implements IRoute{
                     } else {
                         throw new \Exception('Error reading input');
                     }
+                    /*
                     $tmp_name = $outputFilename;
                     if ($realSize != $size) {
                         throw new \Exception('The actual size differs from the declared size in the headers');
                     }
+                    */
                 }
 
                 App::result('success',true);
