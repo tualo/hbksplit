@@ -11,6 +11,7 @@ class PdfSplit implements IRoute{
     public static function register(){
         BasicRoute::add('/hbksplit/upload',function($matches){
             $db = App::get('session')->getDB();
+            App::result('X',$_SERVER);
             App::contenttype('application/json');
             try{
 
