@@ -28,7 +28,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
           deferEmptyText: false
       },
       store: {
-        type: 'memory'
+        type: 'store'
       },
 
       listeners: {
