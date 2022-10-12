@@ -23,18 +23,15 @@ class PdfSplit implements IRoute{
                 
 
                 $newfile = PDF_SPLIT_PATH.'/'.$jobid.'pdf';
-                if (isset($_FILES['userfile'])){
-                    $sfile = $_FILES['userfile']['tmp_name'];
-                    $name = $_FILES['userfile']['name'];
-                    $type = $_FILES['userfile']['type'];
-                    $error = $_FILES['userfile']['error'];
+                if (isset($_FILES['uploadfile'])){
+                    $sfile = $_FILES['uploadfile']['tmp_name'];
+                    $name = $_FILES['uploadfile']['name'];
+                    $type = $_FILES['uploadfile']['type'];
+                    $error = $_FILES['uploadfile']['error'];
                     if ($error == UPLOAD_ERR_OK){
                         move_uploaded_file($sfile, $newfile);
-                    if (file_exists($newfile)){
-                      $config = json_decode(file_get_contents($newfile),true);
-                      unlink($newfile);
+                    
                     }
-                  }
                 }else{
                     /*
                     if (!isset($_SERVER['HTTP_X_FILE_NAME'])) throw new \Exception("Unknown file name");
