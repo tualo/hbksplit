@@ -57,6 +57,11 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         dataIndex: 'currentpage',
         flex: 1,
         //renderer: Ext.util.Format.fileSize
+      }, {
+        header: 'in den HBK Verschieben',
+        dataIndex: 'move',
+        flex: 1,
+        //renderer: Ext.util.Format.fileSize
       }],
 
       viewConfig: {
