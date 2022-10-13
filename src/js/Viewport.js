@@ -15,7 +15,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         xtype: 'toolbar',
         dock: 'top',
         items: [
-            { xtype: 'button', text: 'Button 1', handler: function(){
+            { xtype: 'button', text: 'Dateiupload', handler: function(){
               var dialog = Ext.create('Ext.tualo.Window', {
                 title: 'Belege hochladen',
                 layout: 'fit',
@@ -39,23 +39,41 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         ]
     }],
 
-      columns: [{
-          header: 'Name',
-          dataIndex: 'name',
+    columns: [{
+      header: 'ID',
+      dataIndex: 'id',
+      flex: 2
+      },{
+          header: 'Datei',
+          dataIndex: 'file',
           flex: 2
       }, {
-          header: 'Size',
-          dataIndex: 'size',
-          flex: 1,
-          renderer: Ext.util.Format.fileSize
+        header: 'Seitengesamt',
+        dataIndex: 'pagecount',
+        flex: 1,
+        //renderer: Ext.util.Format.fileSize
+      }, {
+        header: 'Verarbeitet',
+        dataIndex: 'currentpage',
+        flex: 1,
+        //renderer: Ext.util.Format.fileSize
       }],
 
       viewConfig: {
-          emptyText: 'Drop Files Here',
+          emptyText: 'Keine Dokumente vorhanden',
           deferEmptyText: false
       },
       store: {
-        type: 'store'
+        type: 'json',
+        autoLoad: true,
+        proxy: {
+          type: 'ajax',
+          url: './hbksplit/status',
+          reader: {
+              type: 'json',
+              rootProperty: 'data'
+          }
+        },
       },
 
 
