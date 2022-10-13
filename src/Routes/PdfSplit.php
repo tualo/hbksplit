@@ -9,6 +9,7 @@ use Tualo\Office\Basic\IRoute;
 class PdfSplit implements IRoute{
 
     public static function register(){
+
         BasicRoute::add('/hbksplit/upload',function($matches){
             $db = App::get('session')->getDB();
             App::result('X',$_SERVER);
@@ -37,7 +38,28 @@ class PdfSplit implements IRoute{
             }catch(\Exception $e){
                 App::result('msg', $e->getMessage());
             }
-        },array('get','post','put'),true);
+        },[ 'get','post','put' ],true);
+
+        BasicRoute::add('/hbksplit/status',function($matches){
+            $db = App::get('session')->getDB();
+            
+            App::contenttype('application/json');
+            try{
+                if(!defined('PDF_SPLIT_PATH'))  throw new \Exception("configuration PDF_SPLIT_PATH missed");
+                $glob_result = glob(implode('/',[PDF_SPLIT_PATH,'*.json']));
+
+                foreach($glob_result as $file){
+                    //$pdfPages[]=$file;
+                }
+
+                App::result('glob_result',$glob_result);
+                App::result('success',true);
+            }catch(\Exception $e){
+                App::result('msg', $e->getMessage());
+            }
+        },[ 'get','post','put' ],true);
 
     }
+
+    
 }
