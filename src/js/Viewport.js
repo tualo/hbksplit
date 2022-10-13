@@ -81,9 +81,9 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         },
         listeners: {
           load: function(store){
-              console.log('1321');
+            if (!store.destroyed){
               Ext.defer(store.load , 5000, this, [ ]);
-            
+            }
           }
         },
       },
