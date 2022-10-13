@@ -94,14 +94,14 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         width: 120,
         widget: {
             xtype: 'button',
-            /*bind: {
-              record:'{record.id}'
+            publishes: 'recordid',
+            bind: {
+              recordid:'{record.id}'
             },
-            */
             iconCls: 'fa fa-trash',
             listeners: {
               click: function(btn,event){
-                console.log(event.record)
+                console.log(btn,event)
               }
             }
         }
