@@ -57,7 +57,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
       flex: 2
       },{
           header: 'Datei',
-          dataIndex: 'file',
+          dataIndex: 'uploadname',
           flex: 2
       }, {
         header: 'Seitengesamt',

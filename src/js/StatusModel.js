@@ -7,6 +7,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.StatusModel', {
         {name: 'currentpage',   type: 'int' },
         {name: 'pagecount',   type: 'int' },
         {name: 'file', type: 'string'},
+        {name: 'uploadname', type: 'string'},
         {name: 'progress',calculate: function (data) {
             try{
                 return  data.currentpage  / data.pagecount;
