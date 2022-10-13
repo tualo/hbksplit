@@ -94,6 +94,9 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         width: 120,
         widget: {
             xtype: 'button',
+            config:{
+              recordid: ''
+            },
             publishes: 'recordid',
             bind: {
               recordid:'{record.id}'
