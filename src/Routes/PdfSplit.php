@@ -52,8 +52,10 @@ class PdfSplit implements IRoute{
                 foreach($glob_result as $file){
                     //$pdfPages[]=$file;
                     $o = json_decode(file_get_contents($file),true);
-                    $o['file']=basename($o['file']);
-                    $states[] = $o;
+                    if (!is_null($o)){
+                        $o['file']=basename($o['file']);
+                        $states[] = $o;
+                    }
                 }
 
                 App::result('glob_result',$glob_result);
