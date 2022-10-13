@@ -82,7 +82,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         listeners: {
           load: function(store){
               console.log('1321');
-              Ext.defer(store.load(), 5000, this, [ ]);
+              Ext.defer(store.load , 5000, this, [ ]);
             
           }
         },
