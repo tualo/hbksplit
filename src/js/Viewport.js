@@ -40,7 +40,19 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
     }],
 
     columns: [{
+      text: 'Status',
+      xtype: 'widgetcolumn',
+      width: 120,
+      widget: {
+          bind: '{record.progress}',
+          xtype: 'progressbarwidget',
+          textTpl: [
+              '{percent:number("0")}% done'
+          ]
+      }
+  },{
       header: 'ID',
+      hidden: true,
       dataIndex: 'id',
       flex: 2
       },{
