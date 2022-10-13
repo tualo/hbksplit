@@ -110,7 +110,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
                 Tualo.Ajax.request({
                   showWait: true,
                   timeout: 10*60000,
-                  url: './hbksplit/delete/'+btn.getWidgetRecord(),
+                  url: './hbksplit/delete/'+btn.getWidgetRecord().get('id'),
                   params: {
                     
                   },
