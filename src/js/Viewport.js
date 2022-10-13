@@ -81,8 +81,8 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
             },
             */
             iconCls: 'fa fa-redo-alt',
-            handler: function(btn,e){
-              console.log(btn, btn.up('widgetcolumn'))
+            handler: function(btn,event){
+              console.log(event.record)
             }
         }
         //renderer: Ext.util.Format.fileSize
@@ -97,8 +97,8 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
             },
             */
             iconCls: 'fa fa-trash',
-            handler: function(btn,e){
-              console.log(btn)
+            handler: function(btn,event){
+              console.log(event.record)
             }
         }
         //renderer: Ext.util.Format.fileSize
