@@ -10,6 +10,7 @@ class JsLoader implements IRoute{
         BasicRoute::add('/hbksplit/loader.js',function($matches){
             App::contenttype('application/javascript');
             $list = [
+                "js/StatusModel.js",
                 "js/Viewport.js",
                 "js/Routes.js"
             ];

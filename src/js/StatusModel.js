@@ -14,13 +14,15 @@ Ext.define('Ext.cmp.cmp_hbksplit.StatusModel', {
                 
             }
             return 0;
+        }},
+        {name: 'done',calculate: function (data) {
+            try{
+                return  data.currentpage === data.pagecount;
+            }catch(e){
+                
+            }
+            return false;
         }}
-    ],
-
-    changeName: function() {
-        var oldName = this.get('name'),
-            newName = oldName + " The Barbarian";
-
-        this.set('name', newName);
-    }
+    ]
+    
 });

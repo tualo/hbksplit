@@ -83,6 +83,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
       store: {
         type: 'json',
         autoLoad: true,
+        model: 'Ext.cmp.cmp_hbksplit.StatusModel',
         proxy: {
           type: 'ajax',
           url: './hbksplit/status',
