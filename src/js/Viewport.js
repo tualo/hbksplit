@@ -76,7 +76,10 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         widget: {
             xtype: 'button',
             bind: '{record.id}',
-            iconCls: 'fa fa-redo-alt'
+            iconCls: 'fa fa-redo-alt',
+            handler: function(){
+              console.log(arguments)
+            }
         }
         //renderer: Ext.util.Format.fileSize
       }, {
