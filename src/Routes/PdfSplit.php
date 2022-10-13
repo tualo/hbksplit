@@ -60,6 +60,36 @@ class PdfSplit implements IRoute{
             }
         },[ 'get','post','put' ],true);
 
+        BasicRoute::add('/hbksplit/delete/(?P<id>\w+)',function($matches){
+            $db = App::get('session')->getDB();
+            
+            App::contenttype('application/json');
+            try{
+                if(!defined('PDF_SPLIT_PATH'))  throw new \Exception("configuration PDF_SPLIT_PATH missed");
+                
+                try{
+                    $dir = implode('/',[PDF_SPLIT_PATH,'tmp',$matches['id']]);
+                    $jobfile = implode('/',[PDF_SPLIT_PATH,$matches['id'].'.json']);
+                    $it = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
+                    $files = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
+                    foreach($files as $file) {
+                        if ($file->isDir()){
+                            rmdir($file->getRealPath());
+                        } else {
+                            unlink($file->getRealPath());
+                        }
+                    }
+                    rmdir($dir);
+                    unlink($jobfile);
+                }catch(\Exception $e){
+                    App::result('RecursiveDirectoryIterator_msg', $e->getMessage());
+                }
+                
+                App::result('success',true);
+            }catch(\Exception $e){
+                App::result('msg', $e->getMessage());
+            }
+        },[ 'get','post','put' ],true);
     }
 
     
