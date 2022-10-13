@@ -75,10 +75,10 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         width: 120,
         widget: {
             xtype: 'button',
-            bind: '{record.id}',
+            //bind: '{record.id}',
             iconCls: 'fa fa-redo-alt',
-            handler: function(){
-              console.log(arguments)
+            handler: function(btn,e){
+              console.log(e.record.get('id'))
             }
         }
         //renderer: Ext.util.Format.fileSize
@@ -88,7 +88,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         width: 120,
         widget: {
             xtype: 'button',
-            bind: '{record.id}',
+            //bind: '{record.id}',
             iconCls: 'fa fa-trash'
         }
         //renderer: Ext.util.Format.fileSize
