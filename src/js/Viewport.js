@@ -77,13 +77,13 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
           reader: {
               type: 'json',
               rootProperty: 'data'
-          },
-          listeners: {
-            load: function(store){
-               
-                Ext.defer(store.load(), 5000, this, [ ]);
-              
-            }
+          }
+        },
+        listeners: {
+          load: function(store){
+              console.log('1321');
+              Ext.defer(store.load(), 5000, this, [ ]);
+            
           }
         },
       },
