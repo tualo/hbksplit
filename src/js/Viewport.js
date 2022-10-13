@@ -79,6 +79,16 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
             iconCls: 'fa fa-redo-alt'
         }
         //renderer: Ext.util.Format.fileSize
+      }, {
+        header: 'Löschen',
+        xtype: 'widgetcolumn',
+        width: 120,
+        widget: {
+            xtype: 'button',
+            bind: '{record.id}',
+            iconCls: 'fa fa-trash'
+        }
+        //renderer: Ext.util.Format.fileSize
       }],
 
       viewConfig: {
