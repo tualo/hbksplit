@@ -64,7 +64,7 @@ class PdfSplit implements IRoute{
             }
         },[ 'get','post','put' ],true);
 
-        BasicRoute::add('/hbksplit/restart/(?P<id>\w+)',function($matches){
+        BasicRoute::add('/hbksplit/restart/(?P<id>(\w|\-)+)',function($matches){
             $db = App::get('session')->getDB();
             
             App::contenttype('application/json');
