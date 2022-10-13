@@ -70,9 +70,14 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         flex: 1,
         //renderer: Ext.util.Format.fileSize
       }, {
-        header: 'in den HBK Verschieben',
-        dataIndex: 'move',
-        flex: 1,
+        header: 'erneut Verarbeiten',
+        xtype: 'widgetcolumn',
+        width: 120,
+        widget: {
+            xtype: 'button',
+            bind: '{record.id}',
+            iconCls: 'fa fa-redo-alt'
+        }
         //renderer: Ext.util.Format.fileSize
       }],
 
