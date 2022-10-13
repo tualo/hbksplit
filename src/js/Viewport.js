@@ -75,15 +75,17 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         width: 120,
         widget: {
             xtype: 'button',
-            /*
-            bind: {
-              record:'{record.id}'
-            },
-            */
             iconCls: 'fa fa-redo-alt',
+            config:{
+              recordid: ''
+            },
+            publishes: 'recordid',
+            bind: {
+              recordid:'{record.id}'
+            },
             listeners: {
               click: function(btn,event){
-                console.log(event.record)
+                console.log(btn,event.record)
               }
             }
         }
@@ -94,6 +96,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
         width: 120,
         widget: {
             xtype: 'button',
+            iconCls: 'fa fa-trash',
             config:{
               recordid: ''
             },
@@ -101,10 +104,9 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
             bind: {
               recordid:'{record.id}'
             },
-            iconCls: 'fa fa-trash',
             listeners: {
               click: function(btn,event){
-                console.log(btn,event)
+                console.log(btn,event.record)
               }
             }
         }
