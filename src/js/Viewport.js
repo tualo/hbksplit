@@ -85,6 +85,38 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
             },
             listeners: {
               click: function(btn,event){
+
+                Tualo.Ajax.request({
+                  showWait: true,
+                  timeout: 10*60000,
+                  url: './hbksplit/restart/'+btn.getWidgetRecord().get('id'),
+                  params: {
+                    
+                  },
+                  json: function(o){
+                      if (o.success){
+                        
+                          me.fireEvent('cancled');
+                          Ext.toast({
+                              html: "Alle Daten verarbeitet",
+                              title: 'Information',
+                              width: 400,
+                              align: 't'
+                           });
+      
+                      }else{
+                        Ext.toast({
+                          html: o.msg,
+                          title: 'Fehler',
+                          width: 400,
+                          align: 't',
+                          iconCls: 'fa fa-warning'
+                       });
+                      }
+                    }
+                  });
+          
+          
                 console.log(btn.getWidgetRecord(),event)
               }
             }

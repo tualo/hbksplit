@@ -21,7 +21,7 @@ class PdfSplit implements IRoute{
                 if (!isset($_FILES['uploadfile']))  throw new \Exception("upload file missed");
                 if ( $_FILES['uploadfile']['type']!="application/pdf" )  throw new \Exception("only pdf is allowed");
                 
-                $jobid = '867625432634';
+                $jobid = $db->singleValue('select uuid() u',[],'u');
                 // ini_set('upload_max_filesize','2GB');
                 // ini_set('post_max_size','2GB');
 
@@ -32,7 +32,9 @@ class PdfSplit implements IRoute{
                 $error = $_FILES['uploadfile']['error'];
                 if ($error == UPLOAD_ERR_OK){
                     move_uploaded_file($sfile, $newfile);
+                    file_put_contents(PDF_SPLIT_PATH.'/'.$jobid.'.txt',$name);
                 }
+
                 App::result('success',true);
             }catch(\Exception $e){
                 App::result('msg', $e->getMessage());
@@ -49,7 +51,9 @@ class PdfSplit implements IRoute{
                 $states = [];
                 foreach($glob_result as $file){
                     //$pdfPages[]=$file;
-                    $states[] = json_decode(file_get_contents($file),true);
+                    $o = json_decode(file_get_contents($file),true);
+                    $o['file']=basename($o['file']);
+                    $states[] = $o;
                 }
 
                 App::result('glob_result',$glob_result);
@@ -60,7 +64,7 @@ class PdfSplit implements IRoute{
             }
         },[ 'get','post','put' ],true);
 
-        BasicRoute::add('/hbksplit/delete/(?P<id>\w+)',function($matches){
+        BasicRoute::add('/hbksplit/restart/(?P<id>\w+)',function($matches){
             $db = App::get('session')->getDB();
             
             App::contenttype('application/json');
@@ -81,6 +85,39 @@ class PdfSplit implements IRoute{
                     }
                     rmdir($dir);
                     unlink($jobfile);
+                }catch(\Exception $e){
+                    App::result('RecursiveDirectoryIterator_msg', $e->getMessage());
+                }
+                
+                App::result('success',true);
+            }catch(\Exception $e){
+                App::result('msg', $e->getMessage());
+            }
+        },[ 'get','post','put' ],true);
+
+        BasicRoute::add('/hbksplit/delete/(?P<id>\w+)',function($matches){
+            $db = App::get('session')->getDB();
+            
+            App::contenttype('application/json');
+            try{
+                if(!defined('PDF_SPLIT_PATH'))  throw new \Exception("configuration PDF_SPLIT_PATH missed");
+                
+                try{
+                    $dir = implode('/',[PDF_SPLIT_PATH,'tmp',$matches['id']]);
+                    $jobfile = implode('/',[PDF_SPLIT_PATH,$matches['id'].'.json']);
+                    $pdffile = implode('/',[PDF_SPLIT_PATH,$matches['id'].'.pdf']);
+                    $it = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
+                    $files = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
+                    foreach($files as $file) {
+                        if ($file->isDir()){
+                            rmdir($file->getRealPath());
+                        } else {
+                            unlink($file->getRealPath());
+                        }
+                    }
+                    rmdir($dir);
+                    unlink($jobfile);
+                    unlink($pdffile);
                 }catch(\Exception $e){
                     App::result('RecursiveDirectoryIterator_msg', $e->getMessage());
                 }
