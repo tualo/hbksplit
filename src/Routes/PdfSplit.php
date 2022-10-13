@@ -22,9 +22,8 @@ class PdfSplit implements IRoute{
                 if ( $_FILES['uploadfile']['type']!="application/pdf" )  throw new \Exception("only pdf is allowed");
                 
                 $jobid = '867625432634';
-                ini_set('upload_max_filesize','2GB');
-                ini_set('post_max_size','2GB');
-                
+                // ini_set('upload_max_filesize','2GB');
+                // ini_set('post_max_size','2GB');
 
                 $newfile = PDF_SPLIT_PATH.'/'.$jobid.'.pdf';
                 $sfile = $_FILES['uploadfile']['tmp_name'];
@@ -47,12 +46,14 @@ class PdfSplit implements IRoute{
             try{
                 if(!defined('PDF_SPLIT_PATH'))  throw new \Exception("configuration PDF_SPLIT_PATH missed");
                 $glob_result = glob(implode('/',[PDF_SPLIT_PATH,'*.json']));
-
+                $states = [];
                 foreach($glob_result as $file){
                     //$pdfPages[]=$file;
+                    $states[] = json_decode(file_get_contents($file),true);
                 }
 
                 App::result('glob_result',$glob_result);
+                App::result('data',$states);
                 App::result('success',true);
             }catch(\Exception $e){
                 App::result('msg', $e->getMessage());
