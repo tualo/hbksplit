@@ -129,6 +129,41 @@ class PdfSplit implements IRoute{
                 App::result('msg', $e->getMessage());
             }
         },[ 'get','post','put' ],true);
+
+
+        BasicRoute::add('/hbksplit/move/(?P<id>(\w|\-)+)',function($matches){
+            $db = App::get('session')->getDB();
+            
+            App::contenttype('application/json');
+            try{
+                if(!defined('PDF_SPLIT_PATH'))  throw new \Exception("configuration PDF_SPLIT_PATH missed");
+                
+
+                
+                $dir = implode('/',[PDF_SPLIT_PATH,'tmp',$matches['id']]);
+                $dst = HLS_JOB_DIR;
+
+                try{
+                    $dir = implode('/',[PDF_SPLIT_PATH,'tmp',$matches['id']]);
+                    $jobfile = implode('/',[PDF_SPLIT_PATH,$matches['id'].'.json']);
+                    $it = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
+                    $files = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
+                    foreach($files as $file) {
+                        if (!$file->isDir()){
+                            rename($file->getRealPath(),HLS_JOB_DIR.'/'.basename($file->getRealPath()));
+                        }
+                    }
+                    unlink($jobfile);
+                }catch(\Exception $e){
+                    App::result('RecursiveDirectoryIterator_msg', $e->getMessage());
+                }
+                
+                App::result('success',true);
+            }catch(\Exception $e){
+                App::result('msg', $e->getMessage());
+            }
+        },[ 'get','post','put' ],true);
+        
     }
 
     

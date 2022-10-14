@@ -180,6 +180,59 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
             }
         }
         //renderer: Ext.util.Format.fileSize
+      },{
+        header: 'HBK',
+        xtype: 'widgetcolumn',
+        width: 120,
+        widget: {
+            xtype: 'button',
+            iconCls: 'fa fa-angle-double-right',
+            config:{
+              recordid: ''
+            },
+            publishes: 'recordid',
+            bind: {
+              recordid:'{record.id}'
+            },
+            listeners: {
+              click: function(btn,event){
+
+                Tualo.Ajax.request({
+                  showWait: true,
+                  timeout: 10*60000,
+                  url: './hbksplit/move/'+btn.getWidgetRecord().get('id'),
+                  params: {
+                    
+                  },
+                  json: function(o){
+                      if (o.success){
+                        
+                          me.fireEvent('cancled');
+                          Ext.toast({
+                              html: "Alle Daten verarbeitet",
+                              title: 'Information',
+                              width: 400,
+                              align: 't'
+                           });
+      
+                      }else{
+                        Ext.toast({
+                          html: o.msg,
+                          title: 'Fehler',
+                          width: 400,
+                          align: 't',
+                          iconCls: 'fa fa-warning'
+                       });
+                      }
+                    }
+                  });
+          
+          
+                console.log(btn.getWidgetRecord(),event)
+              }
+            }
+        }
+        //renderer: Ext.util.Format.fileSize
       }],
 
       viewConfig: {
