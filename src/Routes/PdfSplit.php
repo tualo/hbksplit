@@ -142,6 +142,8 @@ class PdfSplit implements IRoute{
                 
                 $dir = implode('/',[PDF_SPLIT_PATH,'tmp',$matches['id']]);
                 $dst = HLS_JOB_DIR;
+                $jobfile = implode('/',[PDF_SPLIT_PATH,$matches['id'].'.json']);
+                $pdffile = implode('/',[PDF_SPLIT_PATH,$matches['id'].'.pdf']);
 
                 try{
                     $dir = implode('/',[PDF_SPLIT_PATH,'tmp',$matches['id']]);
@@ -154,6 +156,7 @@ class PdfSplit implements IRoute{
                         }
                     }
                     unlink($jobfile);
+                    unlink($pdffile);
                 }catch(\Exception $e){
                     App::result('RecursiveDirectoryIterator_msg', $e->getMessage());
                 }
