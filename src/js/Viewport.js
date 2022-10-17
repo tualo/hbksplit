@@ -47,7 +47,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
           bind: '{record.progress}',
           xtype: 'progressbarwidget',
           textTpl: [
-              '{percent:number("0")}% done'
+              '{percent:number("0")}%'
           ]
       }
   },{
