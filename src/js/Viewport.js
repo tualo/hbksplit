@@ -101,7 +101,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
                   json: function(o){
                       if (o.success){
                         
-                          me.fireEvent('cancled');
+                          //me.fireEvent('cancled');
                           Ext.toast({
                               html: "Alle Daten verarbeitet",
                               title: 'Information',
@@ -154,7 +154,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
                   json: function(o){
                       if (o.success){
                         
-                          me.fireEvent('cancled');
+                          //me.fireEvent('cancled');
                           Ext.toast({
                               html: "Alle Daten verarbeitet",
                               title: 'Information',
@@ -207,7 +207,7 @@ Ext.define('Ext.cmp.cmp_hbksplit.Viewport', {
                   json: function(o){
                       if (o.success){
                         
-                          me.fireEvent('cancled');
+                          // me.fireEvent('cancled');
                           Ext.toast({
                               html: "Alle Daten verarbeitet",
                               title: 'Information',
