@@ -1,13 +1,16 @@
 <?php
+
 namespace Tualo\Office\HBKSplit\Routes;
 
 use Tualo\Office\Basic\TualoApplication as App;
 use Tualo\Office\Basic\Route as BasicRoute;
 use Tualo\Office\Basic\IRoute;
 
-class JsLoader implements IRoute{
-    public static function register(){
-        BasicRoute::add('/hbksplit/loader.js',function($matches){
+class JsLoader extends \Tualo\Office\Basic\RouteWrapper
+{
+    public static function register()
+    {
+        BasicRoute::add('/hbksplit/loader.js', function ($matches) {
             App::contenttype('application/javascript');
             $list = [
                 "js/StatusModel.js",
@@ -15,12 +18,10 @@ class JsLoader implements IRoute{
                 "js/Routes.js"
             ];
             $content = '';
-            foreach( $list as $item ){
-                $content .= file_get_contents( dirname(__DIR__,1).'/'.$item ).PHP_EOL.PHP_EOL;
+            foreach ($list as $item) {
+                $content .= file_get_contents(dirname(__DIR__, 1) . '/' . $item) . PHP_EOL . PHP_EOL;
             }
-            App::body( $content );
-            
-        },array('get'),false);
-
+            App::body($content);
+        }, array('get'), false);
     }
 }
